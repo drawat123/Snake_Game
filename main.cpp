@@ -113,7 +113,7 @@ int main() {
   SDL_Window *gWindow = NULL;
   SDL_Renderer *gRenderer = NULL;
   TTF_Font *gFont = NULL;
-  LTexture gGameOverTexture, gScoreTexture, gHighScoreTexture;
+  LTexture gGameOverTexture;
   Snake snakeObj(SCREEN_WIDTH, SCREEN_HEIGHT, snakeColor);
   Ball ballObj(SCREEN_WIDTH, SCREEN_HEIGHT, ballColor);
   SDL_Event e;
@@ -125,8 +125,6 @@ int main() {
   } else {
     if (!(gGameOverTexture.loadFromFile(gRenderer, gGameOverFile)) ||
         !(gFont = TTF_OpenFont("../res/OpenSans-Regular.ttf", 20)) ||
-        !(gScoreTexture.loadFromRenderedText(std::to_string(currScore).c_str(),
-                                             gRenderer, gFont, textColor)) ||
         !(gEatSound = Mix_LoadWAV("../res/eat.wav")) ||
         !(gGameOver = Mix_LoadWAV("../res/game_over.wav"))) {
       printf("Failed to load media!\n");
@@ -155,13 +153,14 @@ int main() {
         if (gState == GameState::RUNNING) {
           if (snakeObj.Move(dir, ballObj, gEatSound)) {
             currScore = snakeObj.GetScore();
-            std::string text = "Score: " + std::to_string(currScore);
-            gScoreTexture.loadFromRenderedText(text.c_str(), gRenderer, gFont,
-                                               textColor);
+            std::string highScore =
+                "High Score: " + std::to_string(currScore > currHighScore
+                                                    ? currScore
+                                                    : currHighScore);
+            std::string score = "Score: " + std::to_string(currScore);
 
-            text = "High Score: " + std::to_string(currHighScore);
-            gHighScoreTexture.loadFromRenderedText(text.c_str(), gRenderer,
-                                                   gFont, textColor);
+            std::string title{highScore + "          " + score};
+            SDL_SetWindowTitle(gWindow, title.c_str());
           } else
             gState = GameState::DELAY;
         }
@@ -171,8 +170,6 @@ int main() {
         SDL_RenderClear(gRenderer);
 
         if (gState == GameState::RUNNING || gState == GameState::DELAY) {
-          gScoreTexture.render(gRenderer, SCREEN_WIDTH - 100, 0);
-          gHighScoreTexture.render(gRenderer, 10, 0);
           snakeObj.Render(gRenderer);
           ballObj.Render(gRenderer);
         } else if (gState == GameState::OVER) {

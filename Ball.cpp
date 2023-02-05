@@ -11,10 +11,6 @@ Ball::Ball(const int &sWidth, const int &sHeight, SDL_Color color)
 
   for (int y = 0; y < SCREEN_HEIGHT / 10; y++) {
     for (int x = 0; x < SCREEN_WIDTH / 10; x++) {
-      if (y == 0 && ((x * 10) == (SCREEN_WIDTH - 100) ||
-                     (x * 10) == 10)) // score and high score text area.
-        continue;
-
       m_Grid.push_back({x * 10, y * 10, 10, 10});
     }
   }
