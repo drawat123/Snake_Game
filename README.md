@@ -2,7 +2,7 @@
 A 2D Snake game using C++ and SDL
 
 
-![](https://github.com/drawat123/Snake_Game/blob/main/Snake_Game.gif)
+![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
 
 ## Dependencies for Running Locally
 
