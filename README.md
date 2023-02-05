@@ -1,6 +1,7 @@
 # Snake Game SDL2
 A 2D Snake game using C++ and SDL
 
+![Snake_Game](https://user-images.githubusercontent.com/21956879/216837133-ee311893-6b42-4716-aa16-579eea39ab02.gif)
 
 ## Dependencies for Running Locally
 
