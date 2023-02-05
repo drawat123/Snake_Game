@@ -2,8 +2,6 @@
 A 2D Snake game using C++ and SDL
 
 
-![Alt Text](https://github.com/drawat123/Snake_Game/raw/main/Snake_Game.gif)
-
 ## Dependencies for Running Locally
 
 * cmake >= 3.0
